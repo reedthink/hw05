@@ -86,7 +86,7 @@ std::string phone[] = {"110", "119", "120", "12315"};
 }
 
 int main() {
-    for (int i = 0; i < 262144; i++) {
+    for (int i = 0; i < 10000; i++) {
         tpool.create([&] {
             std::cout << do_register(test::username[rand() % 4], test::password[rand() % 4], test::school[rand() % 4], test::phone[rand() % 4]) << std::endl;
         });
