@@ -35,6 +35,7 @@ std::string do_register(std::string username, std::string password, std::string 
 
 std::string do_login(std::string username, std::string password) {
     // 作业要求2：把这个登录计时器改成基于 chrono 的
+    std::unique_lock grd(mtx);
     using namespace std::chrono;
     steady_clock::time_point now = steady_clock::now();
     if (has_login.find(username) != has_login.end()) {
@@ -42,7 +43,6 @@ std::string do_login(std::string username, std::string password) {
         int sec = duration_cast<seconds>(now - has_login.at(username)).count();
         return std::to_string(sec) + "秒内登录过";
     }
-    std::unique_lock grd(mtx);
     has_login[username] = now;
 
     if (users.find(username) == users.end())
